@@ -1,22 +1,33 @@
 // Given a 32-bit signed integer, reverse digits of an integer.
 
 var reverse = function(x) {
+    var neg = false
     var digits = x.toString()
     var splitNum = []
-    var reverseNum = []
+    var reverseNum = 0
     var i
     
-    for (i = 0; i < digits.length; i+=1) {
+    for (i = 0; i < digits.length; i += 1) {
+        if(isNaN(digits.charAt(i))){
+            neg = true
+        }
+    }
+
+    for (i = 0; i < digits.length; i += 1) {
         splitNum.push(+digits.charAt(i))
     }
 
-    for (i=i; i < splitNum.length; i-=1) {
-        reverseNum.push(+splitNum.charAt(i));
-        console.log(splitNum.charAt(i))
-    }
+    splitNum.reverse()
 
-    console.log("i=",i)
-    console.log(reverseNum)
+    if (neg === true) {
+        splitNum.pop()
+        splitNum.unshift("-")
+        reverseNum = splitNum.join("")
+    } else {
+        reverseNum = splitNum.join("")
+    }
+    
+    return(reverseNum)
 };
 
-reverse(1234)
+reverse(156)
